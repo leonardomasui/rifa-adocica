@@ -5,8 +5,6 @@ import { generatePixPayload } from './utils/pix'
 
 // O mock será substituído pela API
 const SHEET_ID = "1T6O8M4El1ciW2v0FZNQIXwF7kWzJshhfBze1UowWAgk";
-// Para fins da documentação que o usuário pediu:
-// fetch("URL_DO_APPS_SCRIPT") ... converter resposta -> vendidos.
 
 function App() {
   const [vendidos, setVendidos] = useState([]);
@@ -20,11 +18,10 @@ function App() {
   const PIX_CONFIG = {
     key: "19989318419",
     name: "Gabriela Eduarda Gimenez da Silva",
-    city: "Piracicaba" // Cidade padrão
+    city: "Piracicaba"
   };
 
   useEffect(() => {
-    // Para funcionar integração real, substitua pela URL do Apps Script Implantado (Web App):
     const URL_DO_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbzB8mjZ7w-U3fhYyZvM3gUmzBR4WB2uS82FmSqWGFONTqiobQXeP0vNQmdUiMXxzmY0/exec"; 
     
     if (URL_DO_APPS_SCRIPT) {
@@ -40,9 +37,8 @@ function App() {
           setLoading(false);
         });
     } else {
-      // Mock temporário caso a URL não esteja configurada
       setTimeout(() => {
-        setVendidos([7, 12, 23, 45, 88]); // mock
+        setVendidos([7, 12, 23, 45, 88]);
         setLoading(false);
       }, 1500);
     }
@@ -82,74 +78,88 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Background animado (partículas) viria aqui, vamos usar gradiente fixo por enquanto */}
+    <div className="min-h-screen relative overflow-hidden bg-[#0a0a0a] text-white font-sans selection:bg-rifa-pink/30">
+      {/* Background Decorativo */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-rifa-red/20 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-rifa-pink/10 rounded-full blur-[120px] animate-pulse delay-700"></div>
+      </div>
       
       {/* Hero Section */}
-      <header className="pt-20 pb-16 px-4 text-center relative z-10 glass-card mx-4 mt-4 rounded-3xl border-t border-white/20">
-        <Heart className="w-16 h-16 text-rifa-pink mx-auto mb-4 animate-pulse drop-shadow-[0_0_15px_rgba(255,209,217,0.5)]" />
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-rifa-pink to-rifa-gold">
+      <header className="pt-20 pb-16 px-4 text-center relative z-10 glass-card mx-4 mt-4 rounded-[40px] border-t border-white/10 shadow-2xl">
+        <div className="absolute inset-0 bg-gradient-to-b from-rifa-red/5 to-transparent rounded-[40px]"></div>
+        <Heart className="w-16 h-16 text-rifa-pink mx-auto mb-6 animate-pulse drop-shadow-[0_0_15px_rgba(255,209,217,0.5)]" />
+        <h1 className="text-5xl md:text-7xl font-black mb-4 tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-rifa-pink via-white to-rifa-gold">
           RIFA ADOÇICA
         </h1>
-        <h2 className="text-xl md:text-2xl font-light mb-2 tracking-widest text-white/90">
-          DIA DOS NAMORADOS
+        <h2 className="text-xl md:text-2xl font-light mb-8 tracking-[0.3em] text-rifa-gold/80 uppercase">
+          Edição Dia dos Namorados
         </h2>
-        <p className="text-white/70 max-w-lg mx-auto mb-8 font-light">
-          Escolha seus números e participe de uma experiência romântica inesquecível.
-        </p>
         
-        <div className="flex flex-col items-center justify-center gap-4">
-          <div className="glass px-6 py-3 rounded-full flex gap-4 items-center">
-            <span className="text-rifa-gold font-bold text-xl">Sorteio: 10/06</span>
-            <div className="w-px h-6 bg-white/20"></div>
-            <span className="text-rifa-pink font-bold text-xl">R$ 5,00 / número</span>
+        <div className="flex flex-col items-center justify-center gap-6">
+          <div className="glass-card px-8 py-4 rounded-full flex gap-6 items-center border border-white/10 shadow-inner">
+            <div className="flex flex-col items-start">
+              <span className="text-[10px] uppercase tracking-widest text-white/40">Data do Sorteio</span>
+              <span className="text-rifa-gold font-bold text-xl">10 de Junho</span>
+            </div>
+            <div className="w-px h-10 bg-white/10"></div>
+            <div className="flex flex-col items-start">
+              <span className="text-[10px] uppercase tracking-widest text-white/40">Valor por Número</span>
+              <span className="text-rifa-pink font-bold text-xl">R$ 5,00</span>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Grid de Números */}
-      <main className="max-w-4xl mx-auto px-4 py-16 relative z-10">
-        <div className="text-center mb-10">
-          <h3 className="text-2xl font-bold mb-2 flex items-center justify-center gap-2">
-            <Gift className="text-rifa-gold" />
-            Escolha Seus Números
-          </h3>
-          <p className="text-white/60">Selecione os números da sorte abaixo. Números cinzas já foram vendidos.</p>
+      <main className="max-w-4xl mx-auto px-4 py-20 relative z-10">
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-rifa-gold/10 border border-rifa-gold/20 mb-4">
+            <Gift size={16} className="text-rifa-gold" />
+            <span className="text-xs font-bold text-rifa-gold uppercase tracking-wider">Garanta sua sorte</span>
+          </div>
+          <h3 className="text-3xl md:text-4xl font-bold mb-4">Escolha Seus Números</h3>
+          <p className="text-white/50 max-w-md mx-auto">Toque nos números desejados para selecionar. Números escuros com traço já foram vendidos.</p>
         </div>
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
-            <div className="w-16 h-16 border-4 border-rifa-pink border-t-rifa-red rounded-full animate-spin"></div>
-            <p className="mt-4 text-rifa-pink font-medium animate-pulse">Buscando números apaixonados...</p>
+            <div className="w-20 h-20 relative">
+              <div className="absolute inset-0 border-4 border-rifa-pink/20 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-rifa-pink border-t-transparent rounded-full animate-spin"></div>
+              <Heart className="absolute inset-0 m-auto text-rifa-pink animate-pulse" size={24} />
+            </div>
+            <p className="mt-8 text-rifa-pink font-medium animate-pulse tracking-widest uppercase text-xs">Sincronizando com a sorte...</p>
           </div>
         ) : error ? (
-          <div className="text-center text-red-500 py-10 bg-red-950/50 rounded-xl">
-            <p>Erro ao carregar a rifa. Tente novamente mais tarde.</p>
+          <div className="text-center text-rifa-red py-16 bg-rifa-red/5 border border-rifa-red/20 rounded-3xl backdrop-blur-xl">
+            <p className="font-bold text-xl mb-2">Ops! Algo deu errado.</p>
+            <p className="opacity-70">Não conseguimos carregar os números. Tente atualizar a página.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-5 sm:grid-cols-8 md:grid-cols-10 gap-3">
+          <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-10 gap-3 md:gap-4">
             {Array.from({ length: 101 }, (_, i) => i).map((num) => {
-              const estornado = vendidos.includes(num); // "Vendido"
+              const isVendido = vendidos.includes(num);
               const isSelected = selecionados.includes(num);
 
-              let bgClass = "bg-white/10 hover:bg-white/20 border-white/20 text-white"; // Disponível
-              if (estornado) {
-                bgClass = "bg-zinc-800/80 border-zinc-700 text-zinc-500 cursor-not-allowed opacity-60"; // Vendido
+              let bgClass = "bg-white/5 hover:bg-white/10 border-white/10 text-white/90 hover:scale-105 active:scale-95";
+              if (isVendido) {
+                bgClass = "bg-black/40 border-white/5 text-white/20 cursor-not-allowed opacity-40";
               } else if (isSelected) {
-                bgClass = "bg-rifa-red border-rifa-pink text-white shadow-[0_0_15px_rgba(193,18,31,0.6)] scale-110 z-10"; // Selecionado
+                bgClass = "bg-gradient-to-br from-rifa-red to-rifa-pink border-rifa-pink text-white shadow-[0_0_25px_rgba(193,18,31,0.5)] scale-110 z-10 rotate-3";
               }
 
               return (
                 <button
                   key={num}
                   onClick={() => toggleNumero(num)}
-                  disabled={estornado}
-                  className={`relative w-full aspect-square rounded-xl border flex items-center justify-center font-bold text-lg md:text-xl transition-all duration-300 ${bgClass}`}
+                  disabled={isVendido}
+                  className={`relative w-full aspect-square rounded-2xl border flex items-center justify-center font-black text-xl md:text-2xl transition-all duration-300 ${bgClass}`}
                 >
                   {num}
-                  {estornado && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-full h-px bg-zinc-500 rotate-45 transform"></div>
+                  {isVendido && (
+                    <div className="absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl">
+                      <div className="w-[150%] h-px bg-white/20 rotate-45 transform"></div>
                     </div>
                   )}
                 </button>
@@ -161,23 +171,26 @@ function App() {
 
       {/* Checkout flutuante */}
       {selecionados.length > 0 && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 z-50 animate-fade-in-up">
-          <div className="max-w-2xl mx-auto glass-card rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row items-center justify-between gap-4 border-t-rifa-pink/30">
+        <div className="fixed bottom-0 left-0 right-0 p-6 z-50 animate-fade-in-up">
+          <div className="max-w-2xl mx-auto glass-card rounded-[32px] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 border border-white/20 shadow-[0_-20px_50px_rgba(0,0,0,0.5)]">
             <div className="text-center sm:text-left">
-              <p className="text-white/80">
-                <span className="font-bold text-white">{selecionados.length}</span> números selecionados
-              </p>
-              <p className="text-2xl font-bold text-rifa-gold">
-                Total: R$ {valorTotal.toFixed(2).replace('.', ',')}
+              <div className="flex items-center gap-2 mb-1 justify-center sm:justify-start">
+                <div className="w-2 h-2 rounded-full bg-rifa-pink animate-ping"></div>
+                <p className="text-white/60 text-sm font-medium">
+                  <span className="font-bold text-white text-lg">{selecionados.length}</span> números escolhidos
+                </p>
+              </div>
+              <p className="text-4xl font-black text-white tracking-tight">
+                R$ {valorTotal.toFixed(2).replace('.', ',')}
               </p>
             </div>
             
             <button 
               onClick={() => setShowPix(true)}
-              className="w-full sm:w-auto bg-rifa-gold hover:bg-yellow-500 text-black px-8 py-3 rounded-xl font-bold shadow-[0_0_20px_rgba(212,163,115,0.4)] transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto bg-white text-black hover:bg-rifa-gold transition-colors px-10 py-5 rounded-2xl font-black text-lg shadow-xl flex items-center justify-center gap-3 group"
             >
-              <QrCode size={20} />
-              Gerar PIX
+              <QrCode size={24} className="group-hover:scale-110 transition-transform" />
+              GERAR PAGAMENTO
             </button>
           </div>
         </div>
@@ -187,66 +200,71 @@ function App() {
       {showPix && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
           <div 
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/90 backdrop-blur-md"
             onClick={() => setShowPix(false)}
           />
           
-          <div className="relative w-full max-w-md glass-card rounded-3xl p-8 border border-white/20 animate-scale-in">
+          <div className="relative w-full max-w-md glass-card rounded-[40px] p-8 md:p-10 border border-white/20 animate-scale-in shadow-[0_0_100px_rgba(0,0,0,0.8)]">
             <button 
               onClick={() => setShowPix(false)}
-              className="absolute top-4 right-4 text-white/50 hover:text-white"
+              className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white/50 hover:text-white transition-colors"
             >
-              <X />
+              <X size={24} />
             </button>
 
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-rifa-gold mb-2">Pagamento PIX</h3>
-              <p className="text-white/70">Escaneie o QR Code ou copie o código abaixo</p>
+            <div className="text-center mb-10">
+              <div className="w-16 h-16 bg-rifa-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-rifa-gold/20">
+                <QrCode className="text-rifa-gold" size={32} />
+              </div>
+              <h3 className="text-3xl font-black text-white mb-2 tracking-tight">Pagamento PIX</h3>
+              <p className="text-white/50 text-sm">Escaneie o código abaixo com o app do seu banco</p>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl mb-8 flex items-center justify-center mx-auto w-48 h-48">
+            <div className="bg-white p-6 rounded-[32px] mb-10 flex items-center justify-center mx-auto w-56 h-56 shadow-[0_0_40px_rgba(255,255,255,0.1)]">
               <QRCodeSVG 
                 value={pixPayload}
-                size={160}
+                size={180}
                 level="M"
-                includeMargin={false}
               />
             </div>
 
-            <div className="space-y-4">
-              <div className="text-center">
-                <p className="text-sm text-white/50 mb-1">Valor Total</p>
-                <p className="text-2xl font-bold text-white">R$ {valorTotal.toFixed(2).replace('.', ',')}</p>
+            <div className="space-y-6">
+              <div className="flex justify-between items-end px-2">
+                <div className="text-left">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Total a Pagar</p>
+                  <p className="text-3xl font-black text-white">R$ {valorTotal.toFixed(2).replace('.', ',')}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-1">Titular</p>
+                  <p className="text-sm font-bold text-rifa-gold">Gabriela Eduarda...</p>
+                </div>
               </div>
 
-              <div className="glass-card p-4 rounded-xl border border-white/10">
-                <p className="text-xs text-white/40 mb-2 uppercase tracking-wider font-bold">Código Pix Copia e Cola</p>
-                <div className="flex gap-2">
-                  <input 
-                    type="text" 
-                    readOnly 
-                    value={pixPayload}
-                    className="bg-transparent text-white/80 text-sm flex-1 outline-none overflow-hidden text-ellipsis"
-                  />
+              <div className="bg-white/5 p-5 rounded-2xl border border-white/10 flex flex-col gap-3">
+                <p className="text-[10px] uppercase tracking-widest text-white/30 font-bold">Código Copia e Cola</p>
+                <div className="flex gap-4 items-center">
+                  <div className="flex-1 overflow-hidden">
+                    <p className="text-white/60 text-xs truncate font-mono">{pixPayload}</p>
+                  </div>
                   <button 
                     onClick={copyToClipboard}
-                    className="text-rifa-gold hover:text-rifa-pink transition-colors p-1"
+                    className="flex-shrink-0 w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-rifa-gold hover:bg-rifa-gold hover:text-black transition-all"
                   >
                     {copied ? <Check size={20} /> : <Copy size={20} />}
                   </button>
                 </div>
               </div>
 
-              <div className="pt-4 space-y-3">
+              <div className="pt-4">
                 <button 
                   onClick={handleWhatsApp}
-                  className="w-full bg-green-600 hover:bg-green-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg transition-all"
+                  className="w-full bg-green-600 hover:bg-green-500 text-white py-5 rounded-2xl font-black text-lg flex items-center justify-center gap-3 shadow-[0_10px_30px_rgba(22,163,74,0.3)] transition-all active:scale-95"
                 >
-                  <Check size={20} />
-                  Já fiz o PIX! Enviar Comprovante
+                  <Check size={24} />
+                  JÁ FIZ O PAGAMENTO
                 </button>
-                <p className="text-[10px] text-center text-white/40 italic">
-                  Você será direcionado para o WhatsApp da Gabriela para confirmar seu pagamento.
+                <p className="text-[10px] text-center text-white/30 mt-4 italic leading-relaxed">
+                  Após clicar, você enviará o comprovante para a Gabriela via WhatsApp para validar seus números.
                 </p>
               </div>
             </div>
@@ -255,45 +273,56 @@ function App() {
       )}
 
       {/* Seção Romântica (Decoração) */}
-      <section className="py-20 relative px-4 overflow-hidden">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 relative z-10 glass-card p-8 rounded-3xl">
-             <Wine className="w-12 h-12 text-rifa-pink mb-4" />
-             <h3 className="text-3xl font-bold text-rifa-pink">Uma noite especial</h3>
-             <p className="text-lg text-white/80 leading-relaxed font-light">
-               Para os amantes de bons momentos: O ganhador levará uma cesta exclusiva cuidadosamente preparada com vinho selecionado, brigadeiros gourmet, uvas frescas e morangos, criando o ambiente perfeito para uma noite romântica inesquecível.
-             </p>
-          </div>
-          
-          <div className="relative h-[400px] flex items-center justify-center">
-            {/* Decorações via divs e icones */}
-            <div className="absolute top-10 left-10 animate-bounce delay-100"><Heart className="w-8 h-8 text-rifa-red opacity-80" /></div>
-            <div className="absolute bottom-20 right-10 animate-bounce delay-300"><Heart className="w-12 h-12 text-rifa-pink opacity-60" /></div>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-rifa-red rounded-full blur-[100px] opacity-30"></div>
-            
-            <div className="glass w-48 h-64 rounded-xl rotate-[-10deg] absolute left-10 p-2 shadow-2xl border-white/20">
-              <div className="w-full h-4/5 bg-zinc-800 rounded-lg flex items-center justify-center overflow-hidden">
-                <Crown className="w-16 h-16 text-rifa-gold opacity-50" />
-              </div>
-              <p className="text-center mt-3 font-handwriting text-rifa-pink text-sm">Amor verdadeiro</p>
+      <section className="py-24 relative px-4 overflow-hidden border-t border-white/5 bg-gradient-to-b from-transparent to-black/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8 relative z-10 glass-card p-10 md:p-14 rounded-[48px] border border-white/10">
+               <div className="w-16 h-16 bg-rifa-pink/10 rounded-2xl flex items-center justify-center mb-8 border border-rifa-pink/20">
+                 <Wine className="w-8 h-8 text-rifa-pink" />
+               </div>
+               <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">Uma noite<br/><span className="text-rifa-pink">especial</span></h3>
+               <p className="text-xl text-white/60 leading-relaxed font-light">
+                 Para os amantes de bons momentos: O ganhador levará uma cesta exclusiva cuidadosamente preparada com vinho selecionado, brigadeiros gourmet, uvas frescas e morangos, criando o ambiente perfeito para uma noite romântica inesquecível.
+               </p>
+               <div className="flex items-center gap-4 pt-4 text-rifa-gold">
+                  <Crown size={20} />
+                  <span className="font-bold uppercase tracking-widest text-xs">Prêmio Exclusivo Adoçica</span>
+               </div>
             </div>
             
-            <div className="glass w-56 h-72 rounded-xl rotate-[5deg] absolute right-4 z-10 p-2 shadow-2xl border-white/20">
-              <div className="w-full h-4/5 bg-zinc-800 rounded-lg flex items-center justify-center overflow-hidden bg-gradient-to-br from-rifa-red/20 to-black">
-                 <Camera className="w-16 h-16 text-white/50" />
+            <div className="relative group">
+              <div className="absolute -inset-4 bg-gradient-to-r from-rifa-red to-rifa-pink rounded-[40px] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
+              <div className="relative glass-card p-3 rounded-[40px] border border-white/20 overflow-hidden shadow-2xl">
+                <img 
+                  src="/cesta.jpg" 
+                  alt="Cesta Romântica Rifa Adoçica" 
+                  className="w-full h-auto rounded-[32px] object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </div>
-              <p className="text-center mt-3 font-handwriting text-rifa-gold text-base">Nosso Momento</p>
+              <p className="text-center mt-6 text-white/30 text-xs font-medium tracking-widest uppercase italic">
+                * Imagem meramente ilustrativa
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/80 py-10 px-4 text-center border-t border-white/10 relative z-10 pb-32">
-        <div className="max-w-2xl mx-auto opacity-70 text-sm space-y-4">
-          <p>O sorteio será realizado no dia 10/06.</p>
-          <p>Os números selecionados só serão garantidos após o envio do comprovante de pagamento via WhatsApp.</p>
-          <p className="text-rifa-pink text-lg mt-8 font-light italic">"Boa sorte e feliz Dia dos Namorados ❤️"</p>
+      <footer className="bg-black py-16 px-4 text-center border-t border-white/5 relative z-10 pb-40">
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div className="flex items-center justify-center gap-3 opacity-20 hover:opacity-100 transition-opacity duration-500 cursor-default">
+            <Heart size={16} fill="currentColor" />
+            <div className="w-24 h-px bg-white/50"></div>
+            <Heart size={16} fill="currentColor" />
+          </div>
+          <div className="space-y-4 opacity-40 text-sm font-medium tracking-wide">
+            <p className="hover:text-white transition-colors">O sorteio será realizado no dia 10/06 via Live no Instagram.</p>
+            <p className="hover:text-white transition-colors">Os números selecionados só serão garantidos após validação do comprovante.</p>
+          </div>
+          <p className="text-rifa-pink text-2xl mt-12 font-serif italic tracking-tight drop-shadow-[0_0_10px_rgba(255,209,217,0.3)]">
+            "Boa sorte e feliz Dia dos Namorados ❤️"
+          </p>
         </div>
       </footer>
       
