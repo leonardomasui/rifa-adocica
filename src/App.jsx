@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Heart, Gift, Wine, Camera, Crown } from 'lucide-react'
+import { Heart, Gift, Wine, Camera, Crown, Copy, Check, X, QrCode } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
+import { generatePixPayload } from './utils/pix'
 
 // O mock será substituído pela API
 const SHEET_ID = "1T6O8M4El1ciW2v0FZNQIXwF7kWzJshhfBze1UowWAgk";
@@ -11,7 +13,15 @@ function App() {
   const [selecionados, setSelecionados] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [showPix, setShowPix] = useState(false);
+  const [copied, setCopied] = useState(false);
+  
   const WHATSAPP_NUMBER = "5519989318419";
+  const PIX_CONFIG = {
+    key: "19989318419",
+    name: "Gabriela Eduarda Gimenez da Silva",
+    city: "Piracicaba" // Cidade padrão
+  };
 
   useEffect(() => {
     // Para funcionar integração real, substitua pela URL do Apps Script Implantado (Web App):
@@ -53,9 +63,22 @@ function App() {
 
   const handleWhatsApp = () => {
     const nums = selecionados.sort((a,b) => a - b).join(', ');
-    const msg = `Olá ❤️\nEscolhi os números ${nums} para participar da RIFA ADOÇICA - DIA DOS NAMORADOS.`;
+    const msg = `Olá ❤️\nJá realizei o PIX!\nEscolhi os números ${nums} para participar da RIFA ADOÇICA.\nSegue o comprovante em anexo.`;
     const wappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
     window.open(wappUrl, '_blank');
+  };
+
+  const pixPayload = generatePixPayload({
+    key: PIX_CONFIG.key,
+    name: PIX_CONFIG.name,
+    city: PIX_CONFIG.city,
+    amount: valorTotal
+  });
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(pixPayload);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -150,11 +173,83 @@ function App() {
             </div>
             
             <button 
-              onClick={handleWhatsApp}
-              className="w-full sm:w-auto bg-green-600 hover:bg-green-500 text-white px-8 py-3 rounded-xl font-bold shadow-[0_0_20px_rgba(22,163,74,0.4)] hover:shadow-[0_0_25px_rgba(22,163,74,0.6)] transition-all flex items-center justify-center gap-2"
+              onClick={() => setShowPix(true)}
+              className="w-full sm:w-auto bg-rifa-gold hover:bg-yellow-500 text-black px-8 py-3 rounded-xl font-bold shadow-[0_0_20px_rgba(212,163,115,0.4)] transition-all flex items-center justify-center gap-2"
             >
-              Finalizar pelo WhatsApp
+              <QrCode size={20} />
+              Gerar PIX
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal PIX */}
+      {showPix && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+          <div 
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={() => setShowPix(false)}
+          />
+          
+          <div className="relative w-full max-w-md glass-card rounded-3xl p-8 border border-white/20 animate-scale-in">
+            <button 
+              onClick={() => setShowPix(false)}
+              className="absolute top-4 right-4 text-white/50 hover:text-white"
+            >
+              <X />
+            </button>
+
+            <div className="text-center mb-8">
+              <h3 className="text-2xl font-bold text-rifa-gold mb-2">Pagamento PIX</h3>
+              <p className="text-white/70">Escaneie o QR Code ou copie o código abaixo</p>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl mb-8 flex items-center justify-center mx-auto w-48 h-48">
+              <QRCodeSVG 
+                value={pixPayload}
+                size={160}
+                level="M"
+                includeMargin={false}
+              />
+            </div>
+
+            <div className="space-y-4">
+              <div className="text-center">
+                <p className="text-sm text-white/50 mb-1">Valor Total</p>
+                <p className="text-2xl font-bold text-white">R$ {valorTotal.toFixed(2).replace('.', ',')}</p>
+              </div>
+
+              <div className="glass-card p-4 rounded-xl border border-white/10">
+                <p className="text-xs text-white/40 mb-2 uppercase tracking-wider font-bold">Código Pix Copia e Cola</p>
+                <div className="flex gap-2">
+                  <input 
+                    type="text" 
+                    readOnly 
+                    value={pixPayload}
+                    className="bg-transparent text-white/80 text-sm flex-1 outline-none overflow-hidden text-ellipsis"
+                  />
+                  <button 
+                    onClick={copyToClipboard}
+                    className="text-rifa-gold hover:text-rifa-pink transition-colors p-1"
+                  >
+                    {copied ? <Check size={20} /> : <Copy size={20} />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="pt-4 space-y-3">
+                <button 
+                  onClick={handleWhatsApp}
+                  className="w-full bg-green-600 hover:bg-green-500 text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 shadow-lg transition-all"
+                >
+                  <Check size={20} />
+                  Já fiz o PIX! Enviar Comprovante
+                </button>
+                <p className="text-[10px] text-center text-white/40 italic">
+                  Você será direcionado para o WhatsApp da Gabriela para confirmar seu pagamento.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       )}
