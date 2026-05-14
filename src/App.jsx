@@ -274,36 +274,38 @@ function App() {
 
       {/* Seção Romântica (Decoração) */}
       <section className="py-24 relative px-4 overflow-hidden border-t border-white/5 bg-gradient-to-b from-transparent to-black/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 relative z-10 glass-card p-10 md:p-14 rounded-[48px] border border-white/10">
-               <div className="w-16 h-16 bg-rifa-pink/10 rounded-2xl flex items-center justify-center mb-8 border border-rifa-pink/20">
-                 <Wine className="w-8 h-8 text-rifa-pink" />
-               </div>
-               <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">Uma noite<br/><span className="text-rifa-pink">especial</span></h3>
-               <p className="text-xl text-white/60 leading-relaxed font-light">
-                 Para os amantes de bons momentos: O ganhador levará uma cesta exclusiva cuidadosamente preparada com vinho selecionado, brigadeiros gourmet, uvas frescas e morangos, criando o ambiente perfeito para uma noite romântica inesquecível.
-               </p>
-               <div className="flex items-center gap-4 pt-4 text-rifa-gold">
-                  <Crown size={20} />
-                  <span className="font-bold uppercase tracking-widest text-xs">Prêmio Exclusivo Adoçica</span>
-               </div>
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Bloco de Texto */}
+          <div className="relative z-10 glass-card p-10 md:p-14 rounded-[48px] border border-white/10 text-center flex flex-col items-center">
+             <div className="w-16 h-16 bg-rifa-pink/10 rounded-2xl flex items-center justify-center mb-8 border border-rifa-pink/20">
+               <Wine className="w-8 h-8 text-rifa-pink" />
+             </div>
+             <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+               Uma noite <span className="text-rifa-pink">especial</span>
+             </h3>
+             <p className="text-xl text-white/60 leading-relaxed font-light max-w-2xl">
+               Para os amantes de bons momentos: O ganhador levará uma cesta exclusiva cuidadosamente preparada com vinho selecionado, brigadeiros gourmet, uvas frescas e morangos, criando o ambiente perfeito para uma noite romântica inesquecível.
+             </p>
+             <div className="flex items-center gap-4 pt-8 text-rifa-gold">
+                <Crown size={20} />
+                <span className="font-bold uppercase tracking-widest text-xs">Prêmio Exclusivo Adoçica</span>
+             </div>
+          </div>
+          
+          {/* Bloco da Imagem */}
+          <div className="relative group max-w-4xl mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-r from-rifa-red to-rifa-pink rounded-[40px] blur-2xl opacity-10 group-hover:opacity-30 transition-opacity duration-700"></div>
+            <div className="relative glass-card p-3 rounded-[40px] border border-white/20 overflow-hidden shadow-2xl">
+              <img 
+                src="/cesta.jpg" 
+                alt="Cesta Romântica Rifa Adoçica" 
+                className="w-full h-auto rounded-[32px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-            
-            <div className="relative group">
-              <div className="absolute -inset-4 bg-gradient-to-r from-rifa-red to-rifa-pink rounded-[40px] blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-700"></div>
-              <div className="relative glass-card p-3 rounded-[40px] border border-white/20 overflow-hidden shadow-2xl">
-                <img 
-                  src="/cesta.jpg" 
-                  alt="Cesta Romântica Rifa Adoçica" 
-                  className="w-full h-auto rounded-[32px] object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-              <p className="text-center mt-6 text-white/30 text-xs font-medium tracking-widest uppercase italic">
-                * Imagem meramente ilustrativa
-              </p>
-            </div>
+            <p className="text-center mt-6 text-white/30 text-[10px] font-bold tracking-[0.2em] uppercase italic">
+              * Imagem meramente ilustrativa
+            </p>
           </div>
         </div>
       </section>
