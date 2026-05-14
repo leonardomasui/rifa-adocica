@@ -274,16 +274,16 @@ function App() {
 
       {/* Seção Romântica (Decoração) */}
       <section className="py-24 relative px-4 overflow-hidden border-t border-white/5 bg-gradient-to-b from-transparent to-black/50">
-        <div className="max-w-4xl mx-auto space-y-12">
+        <div className="max-w-4xl mx-auto space-y-8">
           {/* Bloco de Texto */}
-          <div className="relative z-10 glass-card p-10 md:p-14 rounded-[48px] border border-white/10 text-center flex flex-col items-center">
+          <div className="relative z-10 glass-card p-10 md:p-14 rounded-[48px] border border-white/10 text-center flex flex-col items-center justify-center min-h-[500px]">
              <div className="w-16 h-16 bg-rifa-pink/10 rounded-2xl flex items-center justify-center mb-8 border border-rifa-pink/20">
                <Wine className="w-8 h-8 text-rifa-pink" />
              </div>
              <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-6">
                Uma noite <span className="text-rifa-pink">especial</span>
              </h3>
-             <p className="text-xl text-white/60 leading-relaxed font-light max-w-2xl">
+             <p className="text-lg md:text-xl text-white/60 leading-relaxed font-light max-w-2xl">
                Para os amantes de bons momentos: O ganhador levará uma cesta exclusiva cuidadosamente preparada com vinho selecionado, brigadeiros gourmet, uvas frescas e morangos, criando o ambiente perfeito para uma noite romântica inesquecível.
              </p>
              <div className="flex items-center gap-4 pt-8 text-rifa-gold">
@@ -293,13 +293,13 @@ function App() {
           </div>
           
           {/* Bloco da Imagem */}
-          <div className="relative group max-w-4xl mx-auto">
+          <div className="relative group w-full">
             <div className="absolute -inset-4 bg-gradient-to-r from-rifa-red to-rifa-pink rounded-[40px] blur-2xl opacity-10 group-hover:opacity-30 transition-opacity duration-700"></div>
-            <div className="relative glass-card p-3 rounded-[40px] border border-white/20 overflow-hidden shadow-2xl">
+            <div className="relative glass-card p-3 rounded-[40px] border border-white/20 overflow-hidden shadow-2xl h-[500px]">
               <img 
                 src="/cesta.jpg" 
                 alt="Cesta Romântica Rifa Adoçica" 
-                className="w-full h-auto rounded-[32px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                className="w-full h-full rounded-[32px] object-cover transition-transform duration-700 group-hover:scale-[1.05]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
