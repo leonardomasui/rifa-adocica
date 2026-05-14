@@ -296,7 +296,7 @@ function App() {
             {/* Bloco da Imagem */}
             <div className="relative group">
               <div className="absolute -inset-2 bg-gradient-to-r from-rifa-red to-rifa-pink rounded-[32px] blur-xl opacity-10 group-hover:opacity-20 transition-opacity duration-700"></div>
-              <div className="relative glass-card p-2 rounded-[32px] border border-white/20 overflow-hidden shadow-2xl h-full min-h-[350px]">
+              <div className="relative glass-card p-2 rounded-[32px] border border-white/20 overflow-hidden shadow-2xl aspect-square">
                 <img 
                   src="/cesta.jpg" 
                   alt="Cesta Romântica Rifa Adoçica" 
